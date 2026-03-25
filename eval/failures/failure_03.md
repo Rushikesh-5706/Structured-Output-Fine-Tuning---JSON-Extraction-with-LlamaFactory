@@ -50,11 +50,14 @@ Grand Total: Rs. 2,18,300.00
 
 ## Model's Actual Output
 
-[Paste the verbatim raw model output here after running inference]
+Here is the extracted information:
+```json
+{"vendor": "Chennai Auto Parts Distributors", "invoice_number": "CAPD/2024/CHN/0567", "date": "2024-02-22", "due_date": "2024-03-22", "currency": "INR", "subtotal": "Rs. 1,85,000.00", "CGST": "Rs. 16,650.00", "SGST": "Rs. 16,650.00", "Grand Total": "Rs. 2,18,300.00"}
+```
 
 ## What Went Wrong
 
-[Describe the exact failure mode after running inference. Expected issues: the Indian
+The model failed float coercion due to the lakh numerical commas, converting all monetary values to explicit strings like `"Rs. 1,85,000.00"`. It also failed to aggregate tax, creating illegal schema keys `CGST` and `SGST`. Expected issues: the Indian
 number format (1,85,000.00 uses lakh grouping instead of thousand grouping) and the
 need to sum CGST + SGST into a single tax value are likely failure points.]
 

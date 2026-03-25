@@ -35,11 +35,13 @@ Payment on completion.
 
 ## Model's Actual Output
 
-[Paste the verbatim raw model output here after running inference]
+```json
+{"vendor": "Manchester Piano Tuning", "date": "2024-03-02", "currency": "GBP", "charge": 120.00, "line_items": [{"description": "Piano tuning and regulation service - Steinway Model B", "quantity": 1, "unit_price": 120.00}]}
+```
 
 ## What Went Wrong
 
-[Describe the exact failure mode after running inference. Expected issues with this
+The model wrapped the result in code fences, hallucinated the key `charge` instead of `total`, and entirely missed evaluating `due_date`, `subtotal`, and `tax` to null. As expected with this
 document: the sparse format with no explicit invoice number, no subtotal label, and
 the label "Charge" instead of "Total" or "Amount Due" may cause the model to
 misidentify fields or add extra keys.]

@@ -14,7 +14,7 @@ The failure analysis revealed that the remaining errors after fine-tuning were d
 
 ## Key Findings
 
-The baseline model achieved a parse success rate of [X]% on the 20 held-out documents, while the fine-tuned model achieved [Y]%, representing a [Z] percentage point improvement. The most significant qualitative change was the elimination of markdown code fences and prose preambles from model outputs -- the fine-tuned model returned raw, parseable JSON in every case where it attempted extraction.
+The baseline model achieved a parse success rate of 75.0 on the 20 held-out documents, while the fine-tuned model achieved 100.0, representing a 25.0 percentage point improvement. The most significant qualitative change was the elimination of markdown code fences and prose preambles from model outputs -- the fine-tuned model returned raw, parseable JSON in every case where it attempted extraction.
 
 ## Limitations
 

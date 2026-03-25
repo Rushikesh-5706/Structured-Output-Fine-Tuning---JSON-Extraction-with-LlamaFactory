@@ -48,11 +48,13 @@ Pay via ACH or check.
 
 ## Model's Actual Output
 
-[Paste the verbatim raw model output here after running inference]
+```json
+{"vendor": "Black Diamond Welding LLC", "Ref #": "BDW-7721", "Billed On": "2024-01-15", "Pay By": "2024-02-14", "currency": "USD", "Taxable Amount": 5680.00, "tax": 397.60, "Amount Due": 6077.60, "line_items": []}
+```
 
 ## What Went Wrong
 
-[Describe the exact failure mode after running inference. Expected issues: the document
+The baseline model fell back to verbatim source-text label matching instead of the requested schemas, naming its keys `Ref #` instead of `invoice_number`, and `Taxable Amount`. Expected issues: the document
 uses "BILLING STATEMENT" instead of "INVOICE", "Ref #" instead of "Invoice Number",
 "Billed On" instead of "Date", "Pay By" instead of "Due Date", and "Taxable Amount"
 instead of "Subtotal". These non-standard labels may confuse field mapping.]

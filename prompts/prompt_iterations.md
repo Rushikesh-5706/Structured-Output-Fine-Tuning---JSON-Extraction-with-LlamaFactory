@@ -25,7 +25,7 @@ All dates must be YYYY-MM-DD. All monetary values must be numbers, not strings.
 Use null for missing fields. line_items/items must be an array, never null.
 
 Document:
-[DOCUMENT_TEXT]
+{{DOCUMENT_TEXT}}
 
 ## Prompt Version 2 -- One-Shot Example
 
@@ -43,7 +43,7 @@ Output: {"vendor": "Acme Corp", "invoice_number": "1234", "date": "2024-01-05", 
 
 Now extract from this document. Return ONLY the JSON object, nothing else:
 
-[DOCUMENT_TEXT]
+{{DOCUMENT_TEXT}}
 
 ## Prompt Version 3 -- Chain-of-Thought with Explicit Schema
 
@@ -73,4 +73,4 @@ After identifying all fields, return ONLY a single valid JSON object with no
 additional text, no markdown, no code fences, no explanation.
 
 Document:
-[DOCUMENT_TEXT]
+{{DOCUMENT_TEXT}}

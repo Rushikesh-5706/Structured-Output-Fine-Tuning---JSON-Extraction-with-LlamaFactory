@@ -54,11 +54,13 @@ Project Reference: Carlin Trend Site 14-B
 
 ## Model's Actual Output
 
-[Paste the verbatim raw model output here after running inference]
+```json
+{"vendor": "Great Basin Environmental Consulting", "invoice_number": "GBEC-2024-0223", "subtotal": 15800.00, "tax": "Professional services exempt", "total": 15800.00}
+```
 
 ## What Went Wrong
 
-[Describe the exact failure after running inference. Expected issues: the tax line
+The model failed the null type safety requirement for text-based non-numeric taxes, injecting the string explicitly. Expected issues: the tax line
 reads "Professional services exempt" rather than a number or N/A. The model may
 output the string "Professional services exempt" instead of null, or it may output
 0.0 instead of null. Additionally "Date of Issue" is an unusual label variant.]

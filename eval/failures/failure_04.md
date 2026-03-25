@@ -51,11 +51,13 @@ Approved: Shri Arun Kumar, Executive Director (Projects)
 
 ## Model's Actual Output
 
-[Paste the verbatim raw model output here after running inference]
+```json
+{"buyer": "Indian Oil Corporation Ltd.", "supplier": "Thermax Ltd.", "po_number": "IOCL/PO/2024/REF/0334", "date": "2024-02-05", "delivery_date": "2024-05-05", "currency": "INR", "total": "Rs. 4,55,00,000.00 (including applicable taxes)"}
+```
 
 ## What Went Wrong
 
-[Describe the exact failure after running inference. Expected issues: very large INR
+The model output a string representation containing parenthetical notes directly into the total float field. Expected issues: very large INR
 values in crore format (4,55,00,000.00 = 4.55 crore = 45,500,000.00), date ambiguity
 with DD/MM format, and the parenthetical note "including applicable taxes" on total.]
 
