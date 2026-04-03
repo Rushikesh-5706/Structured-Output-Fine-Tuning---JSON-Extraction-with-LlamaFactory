@@ -49,16 +49,15 @@ has not memorised training data (a suspicious near-zero loss before epoch 3 ends
 ### Batch Size: 1
 
 On a Mac with 8GB RAM, running Llama 3.2 3B in 4-bit quantization with fp16
-training limits the per-device batch size to 1. A batch size of 2 triggered
-out-of-memory conditions during initial runs and was reduced to 1. Gradient
+training limits the per-device batch size to 1. Larger batch sizes triggered
+out-of-memory conditions during initial runs and were reduced to 1. Gradient
 accumulation compensates for the small per-step batch size by accumulating
 gradients over 16 steps before each optimizer update.
 
 ### Gradient Accumulation Steps: 16
 
 With per-device batch size 1, accumulating gradients over 16 steps gives an
-effective batch size of 16. This matches the effective batch that would result
-from batch_size=2 with gradient_accumulation=8, preserving the same optimizer
+effective batch size of 16. This preserves the same optimizer
 update frequency while fitting within the 8GB memory constraint. An effective
 batch of 16 is large enough to produce stable gradient estimates across the
 diverse document formats in the training set.

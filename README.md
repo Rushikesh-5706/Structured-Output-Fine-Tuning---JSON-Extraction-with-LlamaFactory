@@ -128,7 +128,7 @@ raw parseable JSON for all 20 documents and reaching 100% parse success.
 | LoRA Alpha | 32 | Standard 2x rank scaling |
 | Learning Rate | 2e-4 | Center of stable range for LoRA on small datasets |
 | Epochs | 3 | Sufficient for 80 examples without overfitting |
-| Batch Size | 1 | OOM at batch=2 on 8GB RAM with fp16 |
+| Batch Size | 1 | Memory limit on 8GB RAM with fp16 |
 | Gradient Accumulation | 16 | Effective batch = 16 with per-device batch 1 |
 | Quantization | 4-bit | Required to fit 3B model in 8GB |
 
