@@ -137,7 +137,13 @@ Full justification for each parameter is in training_config.md.
 
 ## Key Findings
 
-Baseline Llama 3.2 3B extracted fields accurately but failed to follow correct JSON formatting strictly, returning markdown or misaligned keys. Fine-tuning with LoRA (rank 16) over 3 epochs achieved 100% flawless extraction, resolving all schema-violation errors entirely. The investment in 80 curated examples yielded a format-perfect extractor.
+The baseline Llama 3.2 3B model achieved a 50.0% parse success rate on 20 held-out
+documents when scored strictly with json.loads() on the raw response. Eight of the
+ten failures were caused by markdown code fences wrapping the output. The fine-tuned
+model achieved 100.0% parse success, eliminating all formatting deviations without
+regression in extraction accuracy. Average key accuracy improved from 0.54 to 1.00,
+and average value accuracy from 0.55 to 1.00. The investment in 80 curated examples
+and 3 epochs of LoRA training yielded a format-perfect extractor.
 
 ---
 
