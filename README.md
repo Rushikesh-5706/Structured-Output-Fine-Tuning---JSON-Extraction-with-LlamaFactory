@@ -106,11 +106,16 @@ Test set: 20 held-out documents not present in training data
 
 | Metric | Baseline | Fine-Tuned |
 |--------|----------|-----------|
-| Parse Success Rate | 75.0% | 100.0% |
-| Average Key Accuracy | 0.96 | 1.00 |
-| Average Value Accuracy | 0.94 | 1.00 |
+| Parse Success Rate | 50.0% | 100.0% |
+| Average Key Accuracy | 0.54 | 1.00 |
+| Average Value Accuracy | 0.55 | 1.00 |
 
-The evaluation definitively demonstrated that fine-tuning with LoRA eliminated structural and formatting deviations completely, reaching a 100% parse success rate over the baseline model's 75%. Baseline failures were primarily markdown contamination, preamble inclusions, and non-standard key generation.
+The evaluation shows that the base Llama 3.2 3B model achieved a 50% parse success
+rate on 20 held-out documents. is_valid_json is scored strictly: json.loads() on the
+raw response with no preprocessing. Eight of the ten baseline failures were caused
+by the model wrapping its output in markdown code fences, which breaks json.loads()
+on the raw string. The fine-tuned model eliminated this behaviour entirely, returning
+raw parseable JSON for all 20 documents and reaching 100% parse success.
 
 ---
 
