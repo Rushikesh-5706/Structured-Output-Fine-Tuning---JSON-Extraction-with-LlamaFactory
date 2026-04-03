@@ -22,3 +22,5 @@ node_modules/
 hf_cache/
 training_output/
 LLaMA-Factory/
+saves/
+llamaboard_cache/
