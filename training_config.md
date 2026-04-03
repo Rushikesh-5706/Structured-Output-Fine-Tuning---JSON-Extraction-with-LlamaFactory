@@ -46,24 +46,31 @@ begins memorising specific input patterns rather than learning the general
 JSON-formatting behaviour. The loss curve will be monitored to confirm the model
 has not memorised training data (a suspicious near-zero loss before epoch 3 ends).
 
-### Batch Size: 2
+### Batch Size: 1
 
-On a Mac with 8GB RAM, running Llama 3.2 3B in 4-bit quantization limits the
-effective batch size. Batch size 2 provides a stable memory footprint and allows
-gradient accumulation to simulate larger effective batches. Batch size 4 risks
-out-of-memory errors on this hardware configuration.
+On a Mac with 8GB RAM, running Llama 3.2 3B in 4-bit quantization with fp16
+training limits the per-device batch size to 1. A batch size of 2 triggered
+out-of-memory conditions during initial runs and was reduced to 1. Gradient
+accumulation compensates for the small per-step batch size by accumulating
+gradients over 16 steps before each optimizer update.
 
-### Gradient Accumulation Steps: 8
+### Gradient Accumulation Steps: 16
 
-With batch size 2, accumulating gradients over 8 steps gives an effective batch
-size of 16. This is large enough to produce stable gradient estimates across
-diverse document formats without requiring more memory.
+With per-device batch size 1, accumulating gradients over 16 steps gives an
+effective batch size of 16. This matches the effective batch that would result
+from batch_size=2 with gradient_accumulation=8, preserving the same optimizer
+update frequency while fitting within the 8GB memory constraint. An effective
+batch of 16 is large enough to produce stable gradient estimates across the
+diverse document formats in the training set.
 
-### Warmup Steps: 10
+### Warmup Steps: 0
 
-With 80 examples and 3 epochs at batch size 2, the total training steps are
-approximately 120. A 10-step warmup (roughly 8% of total steps) is sufficient
-to ramp the learning rate up smoothly before full training begins.
+The cosine learning rate scheduler was used without a warmup phase. With only
+80 training examples and 3 epochs at effective batch size 16, the total number
+of optimizer steps is approximately 15. A warmup period over such a small number
+of steps provides negligible benefit and was not applied. The cosine scheduler
+itself provides a smooth initial learning rate curve that serves the same purpose
+on small datasets.
 
 ### Quantization: 4-bit (QLoRA)
 
